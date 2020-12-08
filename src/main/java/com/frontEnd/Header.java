@@ -409,4 +409,3 @@ public class Header {
         mainTable.setItems(schedules.getSchedules());
     }
 }
-

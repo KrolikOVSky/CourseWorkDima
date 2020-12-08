@@ -12,6 +12,7 @@ public class Schedule {
     private final SimpleStringProperty positionName = new SimpleStringProperty();
     private final SimpleIntegerProperty countPositions = new SimpleIntegerProperty();
 
+    //Constructor
     public Schedule(){
         this.departmentCode.set("");
         this.branchNumber.set("");

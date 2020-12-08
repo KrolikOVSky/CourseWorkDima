@@ -13,6 +13,7 @@ public class Schedules {
 
     private Long count = 1L;
 
+    // Constructor
     public Schedules() {
         this.schedules = FXCollections.observableList(new ArrayList<>());
     }
@@ -52,10 +53,6 @@ public class Schedules {
         return schedules.remove(getById(id));
     }
 
-    public int getSize() {
-        return schedules.size();
-    }
-
     public Schedules sort() {
         Comparator<Schedule> comparator = Comparator.comparing(Schedule::getBranchNumber).thenComparing(Schedule::getDepartmentCode);
         Schedules schedules = new Schedules(this.schedules);
@@ -63,29 +60,25 @@ public class Schedules {
         return schedules;
     }
 
-    public Schedules betWeenStops(int min, int max) {
-        var schedules = new Schedules();
-        for (var el : this.schedules) {
-            if (el.getCountPositions() > min && el.getCountPositions() < max) schedules.add(el);
+    public ObservableList<String> getPositionsList() {
+        ObservableList<String> positionsList = FXCollections.observableList(new ArrayList<>());
+        for (var schedule : getSchedules()) {
+            boolean flag = false;
+            for (var el : positionsList) {
+                if (schedule.getPositionName().equals(el)) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) positionsList.add(schedule.getPositionName());
         }
-        return schedules;
+        return positionsList;
     }
 
     // result 1
     public ObservableList<ResultOne> result1() {
         ObservableList<String> typesList = getPositionsList();
         ObservableList<ResultOne> result = FXCollections.observableArrayList(new ArrayList<>());
-/*
-        for (var schedule : getSchedules()) {
-            boolean flag = false;
-            for (var el : typesList) {
-                if (schedule.getPositionName().equals(el)) {
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) typesList.add(schedule.getPositionName());
-        }*/
 
         for (var el : typesList) {
             var count = 0;
@@ -113,21 +106,6 @@ public class Schedules {
             if (!flag) tempList.add(schedule.getBranchNumber());
         }
         return tempList.size();
-    }
-
-    public ObservableList<String> getPositionsList() {
-        ObservableList<String> positionsList = FXCollections.observableList(new ArrayList<>());
-        for (var schedule : getSchedules()) {
-            boolean flag = false;
-            for (var el : positionsList) {
-                if (schedule.getPositionName().equals(el)) {
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) positionsList.add(schedule.getPositionName());
-        }
-        return positionsList;
     }
 
     public void removeByCondition(String value) {
