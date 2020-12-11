@@ -3,9 +3,13 @@ package com.frontEnd;
 import com.Global;
 import com.backEnd.Schedule;
 import javafx.event.EventHandler;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 
@@ -44,7 +48,7 @@ public class TableVisual {
             mainTable.getColumns().add(posNameCol);
             mainTable.getColumns().add(countPosCol);
             mainTable.setItems(schedules.getSchedules());
-
+            mainTable.setOnMouseClicked(event -> remove(event));
             setEditable();
 //            tableRoot.getChildren().add(mainTable);
         }
@@ -53,6 +57,19 @@ public class TableVisual {
     public BorderPane getMainBoxOfElements() {
         mainBoxOfElements.setCenter(mainTable);
         return mainBoxOfElements;
+    }
+
+    public void remove(MouseEvent event){
+        if (event.getButton() == MouseButton.SECONDARY) {
+            Schedule currentRoute = mainTable.getSelectionModel().getSelectedItem();
+            if (currentRoute != null) {
+                ContextMenu contextMenu = new ContextMenu();
+                MenuItem removeItem = new MenuItem(String.format("Remove %s's element", currentRoute.getId()));
+                removeItem.setOnAction(event1 -> schedules.remove(currentRoute.getId()));
+                contextMenu.getItems().add(removeItem);
+                mainTable.setContextMenu(contextMenu);
+            }
+        }
     }
 
     public void setEditable() {
