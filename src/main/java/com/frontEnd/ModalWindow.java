@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ModalWindow {
     private final Stage stage;
@@ -30,7 +31,7 @@ public class ModalWindow {
         this.stage.setResizable(false);
     }
 
-    public void showDialog(){
+    public void show(){
         this.stage.showAndWait();
     }
 

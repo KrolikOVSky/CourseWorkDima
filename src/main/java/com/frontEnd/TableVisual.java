@@ -1,8 +1,6 @@
 package com.frontEnd;
 
-import com.Global;
 import com.backEnd.Schedule;
-import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -13,10 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 
-import javax.security.auth.callback.Callback;
-
 import static com.Global.*;
-
 
 public class TableVisual {
     private final BorderPane mainBoxOfElements = new BorderPane();
@@ -59,7 +54,7 @@ public class TableVisual {
         return mainBoxOfElements;
     }
 
-    public void remove(MouseEvent event){
+    public void remove(MouseEvent event) {
         if (event.getButton() == MouseButton.SECONDARY) {
             Schedule currentRoute = mainTable.getSelectionModel().getSelectedItem();
             if (currentRoute != null) {

@@ -191,7 +191,7 @@ public class Header {
                             addBox.getChildren().add(commit);
                         }
                         modalWindow.setMainWorkSpace(addBox);
-                        modalWindow.showDialog();
+                        modalWindow.show();
                     }
                 });
             }
@@ -220,7 +220,7 @@ public class Header {
 
                         ModalWindow window = new ModalWindow("Result 1");
                         window.setMainWorkSpace(mainBox);
-                        window.showDialog();
+                        window.show();
                     }
                 });
 
@@ -237,7 +237,7 @@ public class Header {
                         content.getChildren().add(new Label(String.format("Total number of positions are %d", schedules.result2())));
                         ModalWindow modalWindow = new ModalWindow("Result 2");
                         modalWindow.setMainWorkSpace(content);
-                        modalWindow.showDialog();
+                        modalWindow.show();
                     }
                 });
             }
@@ -380,14 +380,18 @@ public class Header {
 //              Help
             {
                 helpItem.setOnAction(event -> {
-
+                    HelpWindow window = new HelpWindow();
+                    window.show();
                 });
                 helpItem.setAccelerator(new KeyCodeCombination(KeyCode.F1));
             }
 
 //              About
             {
-                aboutItem.setOnAction(event -> {
+                aboutItem.setOnAction(event ->
+                {
+                    AboutWindow window = new AboutWindow();
+                    window.show();
                 });
             }
 
