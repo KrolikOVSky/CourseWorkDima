@@ -56,7 +56,7 @@ public class Header {
             {
                 newItem.setOnAction(event -> {
                     if (Global.changed) {
-                        if (Global.onCloseRequest.show()) Global.newSource();
+                        if (new OnCloseRequest().show()) Global.newSource();
                     } else {
                         Global.newSource();
                     }
@@ -68,7 +68,7 @@ public class Header {
             {
                 openItem.setOnAction(event -> {
                     if (Global.changed) {
-                        if (Global.onCloseRequest.show()) Global.openAction();
+                        if (new OnCloseRequest().show()) Global.openAction();
                     } else {
                         Global.openAction();
                     }
@@ -138,25 +138,25 @@ public class Header {
                             var width = 300;
                             // Department code input
                             {
-                                depCodeInput.setPromptText("Enter department code");
+                                depCodeInput.setPromptText("Enter department code ");
                                 depCodeInput.setPrefWidth(width);
                             }
 
                             // Branch number input
                             {
-                                branchNumberInput.setPromptText("Enter branch number");
+                                branchNumberInput.setPromptText("Enter branch number ");
                                 branchNumberInput.setPrefWidth(width);
                             }
 
                             // Position name input
                             {
-                                branchNumberInput.setPromptText("Enter position name");
-                                branchNumberInput.setPrefWidth(width);
+                                positionNameInput.setPromptText("Enter position name ");
+                                positionNameInput.setPrefWidth(width);
                             }
 
                             // Position counts input
                             {
-                                positionCountInput.setPromptText("Enter quantity of positions");
+                                positionCountInput.setPromptText("Enter quantity of positions ");
                                 positionCountInput.setPrefWidth(width);
                                 positionCountInput.textProperty().addListener((observable, oldValue, newValue) -> {
                                     if (!newValue.matches("\\d*")) {

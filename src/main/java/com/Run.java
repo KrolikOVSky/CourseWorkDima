@@ -1,5 +1,6 @@
 package com;
 
+import com.frontEnd.OnCloseRequest;
 import com.frontEnd.TableVisual;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -23,7 +24,7 @@ public class Run extends Application {
         Global.primaryStage.setOnCloseRequest(event -> {
             Platform.setImplicitExit(false);
             if (Global.changed) {
-                if (Global.onCloseRequest.show()) Platform.setImplicitExit(true);
+                if (new OnCloseRequest().show()) Platform.setImplicitExit(true);
                 else event.consume();
             } else Platform.setImplicitExit(true);
         });

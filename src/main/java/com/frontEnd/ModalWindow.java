@@ -4,56 +4,49 @@ import com.Global;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class ModalWindow {
-    private final Stage stage;
-    private final Scene scene;
-    private final BorderPane mainWorkSpace;
+    private final Stage STAGE;
 
     public ModalWindow(String caption){
-        this.stage = new Stage();
-        this.mainWorkSpace = new BorderPane();
-        this.scene = new Scene(new Pane());
-        this.stage.initModality(Modality.WINDOW_MODAL);
-        this.stage.getIcons().add(Global.primaryStage.getIcons().get(0));
-        this.stage.initOwner(Global.primaryStage);
-        this.stage.setTitle(caption);
-        this.stage.setMinHeight(150);
-        this.stage.setMinWidth(250);
-        this.stage.setResizable(false);
+        this.STAGE = new Stage();
+        this.STAGE.initModality(Modality.WINDOW_MODAL);
+        this.STAGE.getIcons().add(Global.primaryStage.getIcons().get(0));
+        this.STAGE.initOwner(Global.primaryStage);
+        this.STAGE.setTitle(caption);
+        this.STAGE.setMinHeight(150);
+        this.STAGE.setMinWidth(250);
+        this.STAGE.setResizable(false);
     }
 
     public void show(){
-        this.stage.showAndWait();
+        this.STAGE.showAndWait();
     }
 
-    public void close(){ this.stage.close(); }
+    public void close(){
+        this.STAGE.close();
+    }
 
-    public void setMainWorkSpace(Pane node) {
+    public void setMainWorkSpace(Node node) {
+        BorderPane mainWorkSpace = new BorderPane();
         Button closeBtn = new Button("Cancel");
-        closeBtn.setOnAction(event -> this.stage.close());
+        closeBtn.setOnAction(event -> this.STAGE.close());
 
         closeBtn.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.ESCAPE) closeBtn.getOnAction().handle(new ActionEvent());
         });
 
-        this.mainWorkSpace.setBottom(closeBtn);
-        this.mainWorkSpace.setCenter(node);
-        this.mainWorkSpace.setPadding(new Insets(10));
+        mainWorkSpace.setBottom(closeBtn);
+        mainWorkSpace.setCenter(node);
+        mainWorkSpace.setPadding(new Insets(10));
         BorderPane.setAlignment(closeBtn, Pos.CENTER);
-        this.scene.setRoot(this.mainWorkSpace);
-        this.stage.setScene(this.scene);
-    }
-
-    public Stage getStage() {
-        return stage;
+        this.STAGE.setScene(new Scene(mainWorkSpace));
     }
 }

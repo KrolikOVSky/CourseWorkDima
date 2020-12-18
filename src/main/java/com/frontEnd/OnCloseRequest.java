@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.util.Optional;
 
 public class OnCloseRequest {
-    private final Alert alert = new Alert(Alert.AlertType.WARNING);
+    private final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
     public OnCloseRequest() {
         ButtonType yesBtn = new ButtonType("Yes", ButtonBar.ButtonData.YES);
@@ -26,14 +26,14 @@ public class OnCloseRequest {
     public boolean show() {
         Optional<ButtonType> result = alert.showAndWait();
         switch (result.get().getButtonData().getTypeCode()) {
-            case "Y": {
+            case "Y" -> {
                 Global.saveAction();
                 return true;
             }
-            case "N": {
+            case "N" -> {
                 return true;
             }
-            default: {
+            default -> {
                 return false;
             }
         }

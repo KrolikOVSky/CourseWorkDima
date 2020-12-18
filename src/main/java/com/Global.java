@@ -27,24 +27,14 @@ public class Global {
     public static String path = "";
     public static Schedules schedules = new Schedules();
     public static Stage primaryStage = new Stage();
-    public static Scene mainScene = new Scene(new Pane());
     public static TableView<Schedule> mainTable = new TableView<>();
     public static boolean changed = false;
-    public static OnCloseRequest onCloseRequest = new OnCloseRequest();
 
     public static void initialize(Node node) {
         schedules.getSchedules().addListener((InvalidationListener/*ListChangeListener<Schedule>*/) c -> {
-            System.out.println("Last" + changed);
             changed = true;
-            System.out.println("New" + changed);
         });
-
-
-        BorderPane mainWorkSpace = new BorderPane();
-        mainWorkSpace.setTop(new Header().getMainMenuBar());
-        mainWorkSpace.setCenter(node);
-        mainScene.setRoot(mainWorkSpace);
-        primaryStage.setScene(mainScene);
+        primaryStage.setScene(new Scene(new BorderPane(node,new Header().getMainMenuBar(),null,null,null)));
     }
 
     public static void errorReport(Exception e) {
